@@ -26,7 +26,8 @@
     let woeid, longLat;
     let prevSearches = localStorage.getItem('prevSearches') ? JSON.parse(localStorage.getItem('prevSearches')) : [];
     createPrevSearches();
-
+    let noConnectionMsg = `<b>Oops :(</b><br>There's a connection problem. <br> Please try again in a few minutes.`;
+    let noCityFound = `<b>Oops :(</b><br>Information for this city cannot be found at this time. <br> Please try to enter another city.`
     // if there's no connection then it will show the latest weather
     if (navigator.onLine === false && localStorage.getItem('weatherObj')) {
         weatherObj = JSON.parse(localStorage.getItem('weatherObj'));
@@ -124,7 +125,7 @@
                         createPrevSearches();
                     }
                 } else {
-                    errorAccure()
+                    errorAccure('no-city');
                 }
             });
     }
@@ -134,26 +135,37 @@
     // -----------------------------------------------------------------------
 
     function createPrevSearches() {
-        if (prevSearches.length) {
-            document.querySelector('#prev-search').innerHTML = '';
-            prevSearches.forEach(el => {
-                let html = `<div id='${el.woeid}' class="prev-city d-flex align-items-center justify-content-between custom-cursor">
-            <p>${el.title}</p>
-            <span>&gt;</span>
+        document.querySelector('#prev-search').innerHTML = '';
+        prevSearches.forEach(el => {
+            let html = `<div id='city_${el.woeid}' class="prev-city d-flex align-items-center justify-content-between custom-cursor">
+            <p id="cityPara_${el.woeid}">${el.title}</p>
+                <span>
+                <svg aria-hidden="true" width="25px" focusable="false" data-prefix="fas" data-icon="trash-alt"
+                class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512">
+                <path data-id="${el.woeid}" class="delete-city" fill="var(--lightColor)"
+                    d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z">
+                </path>
+            </svg>
+        </span>
         </div>`
-                document.querySelector('#prev-search').innerHTML += html;
+            document.querySelector('#prev-search').innerHTML += html;
+        });
+        document.querySelectorAll('.prev-city').forEach(el => {
+            el.querySelector('p').addEventListener('click', function () {
+                document.querySelector('#loading').classList.remove('d-none');
+                document.querySelector('#body-wrapper').classList.add('d-none');
+                woeid = parseInt(this.getAttribute('id').split('_')[1]);
+                getCityWeather();
+                toggleSearch();
             });
-
-            document.querySelectorAll('.prev-city').forEach(el => {
-                el.addEventListener('click', function () {
-                    document.querySelector('#loading').classList.remove('d-none');
-                    document.querySelector('#body-wrapper').classList.add('d-none');
-                    woeid = parseInt(this.getAttribute('id'));
-                    getCityWeather();
-                    toggleSearch();
-                })
+            el.querySelector('path').addEventListener('click', function (e) {
+                prevSearches = JSON.parse(localStorage.getItem('prevSearches'));
+                prevSearches = prevSearches.filter(el => el.woeid != e.target.getAttribute('data-id'))
+                localStorage.setItem('prevSearches', JSON.stringify(prevSearches));
+                document.querySelector(`#city_${e.target.getAttribute('data-id')}`).remove();
             })
-        }
+        })
     }
 
     // -----------------------------------------------------------------------
@@ -292,15 +304,17 @@
 
         return `${days[day]}, ${parseInt(date.split('-')[2])} ${months[month]}`;
     }
-    
+
     // -----------------------------------------------------------------------
     // When a connection error happen
     // -----------------------------------------------------------------------
 
-    function errorAccure() {
+    function errorAccure(errorCase) {
+        let errorDiv = document.querySelector('#no-data');
         document.querySelector('#loading').classList.add('d-none');
         document.querySelector('#body-wrapper').classList.remove('d-none');
-        document.querySelector('#no-data').classList.remove('d-none');
+        errorDiv.querySelector('p').innerHTML = errorCase == 'no-city' ? noCityFound : noConnectionMsg;
+        errorDiv.classList.remove('d-none');
         document.querySelector('.close-btn-wrapper button').removeEventListener('click', toggleSearch);
         document.querySelector('#search-sec').classList.add('open-search');
     }

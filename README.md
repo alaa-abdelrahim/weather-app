@@ -10,7 +10,7 @@ Weather App aplication. Has a desktop version using `Electron` framework and a w
 # Features
 
 - Users can see city weather as default, according to their `IP`.
-- Users can search for any city all around the world.
+- Users can search for many cities all around the world.
 - Users can see the weather of today and the next 5 days.
 - User can see the date and location of the weather.
 - Users can see according to the image for each type of weather.

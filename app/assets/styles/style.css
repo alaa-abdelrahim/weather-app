@@ -382,24 +382,15 @@ form path {
     margin-bottom: 1.5rem;
 }
 
-.prev-city span {
-    opacity: 0;
-    -webkit-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s;
-}
-
 .prev-city p {
     color: var(--lightColor);
     text-transform: capitalize;
+    line-height: 1.5;
+    padding-right: 3rem;
 }
 
 .prev-city:hover {
     border-color: var(--grey2);
-}
-
-.prev-city:hover span {
-    opacity: 1;
 }
 
 /* ------------------------------ */
@@ -690,7 +681,7 @@ footer p {
     #no-data {
         width: 100%;
         z-index: 11;
-        top: 80%;
+        top: 60%;
         background-color: var(--meanColor);
     }
 
