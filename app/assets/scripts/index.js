@@ -292,8 +292,10 @@
 
         return `${days[day]}, ${parseInt(date.split('-')[2])} ${months[month]}`;
     }
-
+    
+    // -----------------------------------------------------------------------
     // When a connection error happen
+    // -----------------------------------------------------------------------
 
     function errorAccure() {
         document.querySelector('#loading').classList.add('d-none');
