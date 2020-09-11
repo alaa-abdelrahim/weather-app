@@ -1,5 +1,43 @@
 (function () {
     // -----------------------------------------------------------------------
+    // cities array
+    // -----------------------------------------------------------------------
+
+    let citiesArr = ["San Francisco", "Philadelphia", "Manchester", "Birmingham", "Los Angeles", "Chicago",
+        "Osaka", "Mumbai", "Glasgow", "Amsterdam", "Johannesburg", "Rio de Janeiro", "Shanghai", "Jakarta",
+        "São Paulo", "San Diego", "San Jose", "Dallas", "Indianapolis", "San Antonio", "Montréal", "Jacksonville",
+        "Austin", "Madrid", "Guangzhou", "Washington DC", "Paris", "Brisbane", "Milwaukee", "Bradford", "Wakefield",
+        "Istanbul", "El Paso", "Seattle", "Baltimore", "Las Vegas", "Buenos Aires", "Nashville", "Karachi", "Hamburg",
+        "Dubai", "Adelaide", "Charlotte", "Barcelona", "Portland", "Oklahoma City", "Cardiff", "Kolkata", "Cairo",
+        "Virginia Beach", "Kinshasa", "Colorado Springs", "Auckland", "Dongguan", "Sacramento", "Kansas City",
+        "Bangkok", "Mesa", "Atlanta", "Bangalore", "Lima", "Albuquerque", "Lagos", "Long Beach", "Omaha", "Raleigh",
+        "Miami", "Casablanca", "Singapore", "Yokohama", "Nairobi", "Tianjin", "Dhaka", "Pyongyang", "Addis Ababa",
+        "Hyderabad", "Santa Cruz", "Budapest", "Milan", "Cambridge", "Vienna", "Riyadh", "Damascus", "Ankara",
+        "Santiago", "Baghdad", "Anchorage", "Athens", "Santorini", "Reykjavík", "Sofia", "Prague", "Zagreb",
+        "Copenhagen", "Bucharest", "Naples", "Warsaw", "Wichita", "New Orleans", "Calgary", "Manila", "Vancouver",
+        "Maracaibo", "Caracas", "Charleston", "Santander", "Bordeaux", "Wuhan", "Marseille", "Ahmedabad", "Lahore",
+        "Belfast", "Fargo", "Sendai", "Sunderland", "Palm Springs", "Stuttgart", "Hanover", "Salvador", "Lake Tahoe",
+        "Mountain View", "Kawasaki", "Hangzhou", "Blackpool", "Yangon", "Bakersfield", "Salt Lake City", "Geneva",
+        "Reading", "Durban", "Saitama", "Ajaccio", "Mombasa", "Chennai", "Kharkiv", "Taipei", "Aberdeen", "Oakland",
+        "Sapporo", "Surat", "Busan", "Hiroshima", "Northampton", "Southend - on - Sea", "The Hague", "Salford",
+        "Kirkwall", "Swansea", "Penzance", "Ibadan", "Alexandria", "Newcastle", "Jackson", "Sioux Falls", "Nagoya",
+        "Brasília", "Kano", "Kitakyushu", "Denpasar", "Minneapolis", "Frankfurt", "Falmouth", "Fukuoka", "Newark",
+        "Manukau", "Abidjan", "Calvi", "Santa Cruz de Tenerife", "Kuala Lumpur", "Santa Fe", "Nottingham",
+        "Wolverhampton", "Cape Town", "Columbia", "Berlin", "Beijing", "Bristol", "Columbus", "Melbourne", "Boston",
+        "Edinburgh", "Bogotá", "Dublin", "Brussels", "Boise", "Bridgeport", "St Petersburg", "Bremen", "Lisbon",
+        "Gothenburg", "Nuremberg", "Kobe", "Brighton", "Billings", "Boulder", "Middlesbrough", "Bournemouth",
+        "Burlington", "Derby", "Mexico City", "Moscow", "Munich", "Ho Chi Minh City", "Tucson", "Cologne",
+        "Little Rock", "Stockholm", "Richmond", "Cheyenne", "Nice", "Leicester", "Coventry", "Providence", "Ipswich",
+        "Norwich", "Christchurch", "Venice", "Chengdu", "Zurich", "London", "Sydney", "New Delhi", "Leeds",
+        "Sheffield", "Detroit", "Denver", "Oxford", "Edmonton", "Dresden", "Swindon", "Dundee", "Des Moines",
+        "Windhoek", "Sidmouth", "Huddersfield", "Dortmund", "Düsseldorf", "New York", "Seoul", "Kiev", "Phoenix",
+        "Memphis", "Rome", "Liverpool", "Perth", "Louisville", "Tehrān", "Fresno", "Shenzhen", "Exeter", "Toulouse",
+        "Lille", "Stoke - on - Trent", "Preston", "Phuket", "Pune", "Helsinki", "Essen", "St Ives", "Leipzig",
+        "Wellington", "Fort Worth", "Hong Kong", "Wilmington", "Kingston upon Hull", "Houston", "Honolulu", "Hà Nội",
+        "Plymouth", "Rhyl", "Portsmouth", "Torino", "İzmir", "St.Louis", "Minsk", "Tokyo", "Kyoto", "York", "Oslo",
+        "Lyon", "Luton", "Toronto", "Truro"];
+
+    // -----------------------------------------------------------------------
     // register the service worker
     // -----------------------------------------------------------------------
 
@@ -36,6 +74,8 @@
         if (date[0] == now.getFullYear() && (date[1] - 1) == now.getMonth() && date[2] == now.getDate()) {
             changeHTMLData();
             woeid = weatherObj.woeid;
+        } else {
+            errorAccure();
         }
         // when connection back it'll update the data
         window.addEventListener('online', getCityWeather);
@@ -128,6 +168,36 @@
                     errorAccure('no-city');
                 }
             });
+    }
+
+    // -----------------------------------------------------------------------
+    // autocomplete
+    // -----------------------------------------------------------------------
+
+    searchForm.querySelector('input').addEventListener('keyup', handleAutocomplete);
+    function handleAutocomplete() {
+        let inputVal = (searchForm.querySelector('input').value).toLowerCase();
+        let ul = document.querySelector('#search-sec form ul');
+        ul.innerHTML = '';
+
+        if (inputVal.length > 1) {
+            let data = citiesArr.filter(city => city.toLowerCase().startsWith(inputVal));
+            if (data[0]) {
+                createAutocompleteList(data, ul);
+            }
+        }
+    }
+
+    function createAutocompleteList(arr, ul) {
+        arr.forEach(city => {
+            let li = document.createElement('li');
+            li.innerHTML = city;
+            ul.appendChild(li);
+            li.addEventListener('click', function (e) {
+                searchForm.querySelector('input').value = e.target.innerHTML;
+                document.querySelector('#search-sec form ul').innerHTML = '';
+            });
+        })
     }
 
     // -----------------------------------------------------------------------

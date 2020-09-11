@@ -21,7 +21,7 @@ button, input {
     border: none;
 }
 
-.custom-cursor, button {
+.custom-cursor, button, form li {
     cursor: url('../images/cursor.png'), auto;	
 }
 
@@ -395,6 +395,24 @@ form path {
     fill: var(--grey);
 }
 
+form ul {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    list-style: none;
+    background-color: var(--lightColor);
+    color: var(--meanColor);
+    font-size: 2rem;
+    width: 65%;
+}
+
+form li {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--meanColor);
+    font-weight: bold;
+}
+
 .prev-city {
     color: var(--grey2);
     padding: 2rem 1rem;
@@ -407,24 +425,15 @@ form path {
     margin-bottom: 1.5rem;
 }
 
-.prev-city span {
-    opacity: 0;
-    -webkit-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s;
-}
-
 .prev-city p {
     color: var(--lightColor);
     text-transform: capitalize;
+    line-height: 1.5;
+    padding-right: 3rem;
 }
 
 .prev-city:hover {
     border-color: var(--grey2);
-}
-
-.prev-city:hover span {
-    opacity: 1;
 }
 
 /* ------------------------------ */
@@ -442,6 +451,10 @@ form path {
 
 #no-data p {
     font-size: 6rem;
+}
+
+#no-data b {
+    color: var(--secondColor);
     font-weight: 600;
 }
 

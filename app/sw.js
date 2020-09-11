@@ -1,4 +1,4 @@
-const shellCashName = "shell-assets-v7";
+const shellCashName = "shell-assets-v6";
 
 const shellCashSrcs = [
     '/',
