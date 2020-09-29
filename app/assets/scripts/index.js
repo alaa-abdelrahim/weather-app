@@ -370,8 +370,8 @@
             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'];
 
         let day = new Date(date.split('-').join(', ')).getUTCDay();
-        let month = new Date('2020-09-07'.split('-').join(', ')).getUTCMonth();
-
+        let month = new Date(date.split('-').join(', ')).getMonth();
+    
         return `${days[day]}, ${parseInt(date.split('-')[2])} ${months[month]}`;
     }
 

@@ -312,7 +312,7 @@ section, .right-side, #no-data {
 }
 
 .today-date {
-    width: 13rem;
+    width: 15rem;
     color: var(--grey2);
     font-size: 1.5rem;
     font-weight: 600;
