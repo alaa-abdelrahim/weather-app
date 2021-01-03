@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#1e213a",
     "theme_color": "#100e1d",
-    "orientation": "portait_primary",
+    "orientation": "portait",
     "icons": [
         {
             "src": "./assets/images/icones/icon-72.png",

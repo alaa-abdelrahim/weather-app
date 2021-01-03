@@ -106,6 +106,30 @@ html {
 /* sections style */
 /* ------------------------------ */
 
+#addApp {
+    display: block;
+    width: 90%;
+    padding: 1rem;
+
+    position: fixed;
+    bottom: -10%;
+    left: 5%;
+    z-index: 100;
+
+    background-color: var(--secondColor);
+    color: var(--DarkerColor);
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+
+    transition: all 1s;
+    cursor: pointer;
+}
+
+#addApp.show {
+    bottom: 2%;
+}
+
 #body-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;

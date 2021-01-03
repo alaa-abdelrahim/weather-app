@@ -41,8 +41,14 @@
     // register the service worker
     // -----------------------------------------------------------------------
 
+    let deferredPrompt;
     if (navigator.serviceWorker) {
         navigator.serviceWorker.register('/sw.js');
+
+        window.addEventListener('beforeinstallprompt', e => {
+            e.preventDefault();
+            deferredPrompt = e;
+        })
     }
 
     // -----------------------------------------------------------------------
@@ -332,6 +338,22 @@
         document.querySelector('#loading').classList.add('d-none');
         document.querySelector('#body-wrapper').classList.remove('d-none');
         fixHeight();
+
+        // show the install btn for Pwa
+        if(window.innerWidth <= 1229){
+            if(deferredPrompt){
+                setTimeout(() => {
+                    document.querySelector('#addApp').classList.add('show');
+                }, 7000);
+                document.querySelector('#addApp').addEventListener('click', e => {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then( choiceRes => {
+                        deferredPrompt = null;
+                        document.querySelector('#addApp').classList.remove('show');
+                    })
+                })
+            }
+        }
     }
 
     // -----------------------------------------------------------------------
