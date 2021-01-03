@@ -1,0 +1,706 @@
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+}
+
+*:focus,
+input:focus,
+button:focus,
+:focus {
+    outline: 0;
+}
+
+button, input {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border: none;
+}
+
+.custom-cursor, button, form li {
+    cursor: url('../images/cursor.png'), auto;	
+}
+
+html {
+    font-size: 62.5%;
+    margin: 0;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+    overflow-y: scroll;
+    
+    --meanColor: #1e213a;
+    --secondColor: #ffec65;
+    --DarkerColor: #100e1d;
+    --lightColor: #e7e7eb;
+    --grey: #6e707a;
+    --grey2: #9f9eb0;
+}
+
+html::-webkit-scrollbar {
+	width: 0;
+	background: transparent;
+}
+
+/* ------------------------------ */
+/* display classes */
+/* ------------------------------ */
+
+.w-100 {
+    width: 100%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.mx-auto {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.flex-col {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+
+.flex-wrap {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+
+.align-items-center {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+.justify-content-between {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+
+.justify-content-center {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.justify-content-end {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+}
+
+/* ------------------------------ */
+/* sections style */
+/* ------------------------------ */
+
+#body-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    color: var(--lightColor);
+}
+
+.left-side {
+    width: 25%;
+}
+
+.right-side {
+    width: 75%;
+    background-color: var(--DarkerColor);
+    padding: 3% 6%;
+}
+
+section,
+.today-weather-content {
+    padding: 2.5rem;
+}
+
+.weather-icon {
+    -webkit-transform: translateX(-13%);
+        -ms-transform: translateX(-13%);
+            transform: translateX(-13%);
+}
+
+section, .right-side, #no-data {
+    height: 100%;
+}
+
+/* ----------------------- */
+/* application  buttons*/
+/* ----------------------- */
+
+.closeApp-wrapper {
+    width: 100%;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    right: 0;
+}
+
+.closeApp-wrapper button {
+    padding: 1.3rem;
+    color: var(--lightColor);
+    font-weight: bolder;
+}
+
+.closeApp-wrapper button:hover {
+    color: var(--DarkerColor);
+    background-color: var(--secondColor);
+}
+
+/* ----------------------- */
+/* preloading screen */
+/* ----------------------- */
+
+#loading{
+    width: 100%;
+    height: 100vh;
+    background-color: var(--DarkerColor);
+    position: fixed;
+}
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+    width: 80px;
+    height: 80px;
+  }
+
+  .lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--secondColor);
+    -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+
+  .lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    -webkit-animation: lds-ellipsis1 0.6s infinite;
+            animation: lds-ellipsis1 0.6s infinite;
+  }
+
+  .lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    -webkit-animation: lds-ellipsis2 0.6s infinite;
+            animation: lds-ellipsis2 0.6s infinite;
+  }
+
+  .lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    -webkit-animation: lds-ellipsis2 0.6s infinite;
+            animation: lds-ellipsis2 0.6s infinite;
+  }
+
+  .lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    -webkit-animation: lds-ellipsis3 0.6s infinite;
+            animation: lds-ellipsis3 0.6s infinite;
+  }
+
+/* ------------------------------ */
+/* today's weather section */
+/* ------------------------------ */
+
+#today-weather {
+    background-color: var(--meanColor);
+    position: relative;
+}
+
+#today-weather::after {
+    content: '';
+    position: absolute;
+    width: calc(100% + 1.5rem);
+    height: 100%;
+    left: -1.5rem;
+    top: 0;
+    background-image: url('../images/Cloud-background.png');
+    background-repeat: no-repeat;
+    background-size: 130%;
+    background-position: -7rem 6rem;
+    opacity: 0.1;
+}
+
+.today-weather-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.btns-wrapper,
+.today-img-wrapper,
+.today-temp,
+.today-state {
+    margin-bottom: 5rem;
+}
+
+.today-date {
+    margin-bottom: 3.5rem;
+}
+
+.btns-wrapper button {
+    background-color: var(--grey);
+    color: var(--lightColor);
+}
+
+.search-btn {
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.today-img-wrapper {
+    line-height: 0;
+}
+
+.today-temp {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    font-size: 4rem;
+    font-weight: 600;
+}
+
+.today-temp p {
+    font-size: 9rem;
+    font-weight: bolder;
+}
+
+.today-temp span {
+    color: var(--grey2);
+}
+
+.today-state p{
+    color: var(--grey2);
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 2.8rem;
+}
+
+.today-date {
+    width: 15rem;
+    color: var(--grey2);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.city-wrapper path {
+    fill: var(--grey2);
+}
+
+.city-wrapper span {
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: var(--grey2);
+}
+
+/* ------------------------------ */
+/* search section */
+/* ------------------------------ */
+
+#search-sec{
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: -25%;
+    width: 25%;
+    background-color: var(--meanColor);
+    -webkit-transition: left 1s;
+    -o-transition: left 1s;
+    transition: left 1s;
+}
+
+#search-sec.open-search {
+    left: 0;
+}
+
+.close-btn-wrapper,
+form {
+    margin-bottom: 6rem;
+}
+
+.close-btn-wrapper button{
+    color: var(--lightColor);
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+form {
+    position: relative;
+}
+
+form button, form input {
+    color: var(--lightColor);
+    font-size: 1.4rem;
+    font-weight: bolder;
+    padding: 1.3rem 2rem;
+}
+
+form input {
+    width: 65%;
+    border: 1px solid var(--lightColor);
+    padding-left: calc(3rem + 20px);
+}
+
+form button {
+    background-color: #3c47e9;
+    border: 1px solid #3c47e9;
+}
+
+form svg {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+}
+
+form path {
+    fill: var(--grey);
+}
+
+form ul {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    list-style: none;
+    background-color: var(--lightColor);
+    color: var(--meanColor);
+    font-size: 2rem;
+    width: 65%;
+}
+
+form li {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--meanColor);
+    font-weight: bold;
+}
+
+.prev-city {
+    color: var(--grey2);
+    padding: 2rem 1rem;
+    font-weight: 600;
+    font-size: 1.7rem;
+    border: 1px solid transparent;
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+    margin-bottom: 1.5rem;
+}
+
+.prev-city p {
+    color: var(--lightColor);
+    text-transform: capitalize;
+    line-height: 1.5;
+    padding-right: 3rem;
+}
+
+.prev-city:hover {
+    border-color: var(--grey2);
+}
+
+/* ------------------------------ */
+/* no data */
+/* ------------------------------ */
+
+#no-data {
+    position: fixed;
+    z-index: 4;
+    right: 0;
+    top: 0;
+    width: 75%;
+    background-color: var(--DarkerColor);
+}
+
+#no-data p {
+    font-size: 6rem;
+}
+
+#no-data b {
+    color: var(--secondColor);
+    font-weight: 600;
+}
+
+/* ------------------------------ */
+/* right side */
+/* ------------------------------ */
+
+.switch-temp-wrapper,
+.five-days-wrapper,
+.today-heighlight {
+    margin-bottom: 7rem;
+}
+
+.switch-temp-wrapper button {
+    background-color: var(--meanColor);
+    color: var(--lightColor);
+    font-weight: 600;
+    padding: 1.75rem 0;
+    width: 4rem;
+    line-height: 0;
+    border-radius: 50%;
+}
+
+.switch-temp-wrapper button:first-child {
+    margin-right: 1rem;
+}
+
+.switch-temp-wrapper .switch-temp-active {
+    background-color: var(--lightColor);
+    color: var(--DarkerColor);
+}
+
+.each-day {
+    margin-right: 3%;
+    width: 17%;
+    padding: 3rem 1rem;
+    background-color: var(--meanColor);
+}
+
+.each-day:last-child {
+    margin-right: 0;
+}
+
+.each-day-date {
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.each-day figure {
+    margin-bottom: 3rem;
+}
+
+.each-day img {
+    width: 10rem;
+}
+
+.each-day-temp-wrapper {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.each-day-temp-wrapper div:last-child {
+    color: var(--grey2);
+}
+
+.today-heighlight h2 {
+    font-weight: bolder;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.heightlights-sec {
+    background-color: var(--meanColor);
+    padding: 3rem;
+    width: calc(50% - 1.5rem);
+    margin-bottom: 3rem;
+}
+
+.heightlights-sec:nth-child(odd) {
+    margin-right: 3rem;
+}
+
+.heightlights-sec h3 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.heightlights-val {
+    margin-bottom: 4rem;
+}
+
+.heightlights-val p {
+    font-weight: 600;
+    font-size: 4rem;
+}
+
+.heightlights-val .heightlights-val-num {
+    font-size: 8rem;
+}
+
+#visibility .heightlights-val-num,
+#air-pressure .heightlights-val-num {
+    margin-right: 1rem;
+}
+
+#dir {
+    width: 31px;
+    padding: 8px 0;
+    background-color: var(--grey);
+    border-radius: 50%;
+    line-height: 0;
+    margin-right: 1.5rem;
+}
+
+#dir path {
+    fill: var(--lightColor);
+}
+
+#compass {
+    font-weight: 600;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+#prograss-bar-wrapper {
+    position: relative;
+    background-color: var(--grey2);
+    width: 80%;
+    height: 0.75rem;
+    border-radius: 1rem;
+}
+
+#prograss-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--secondColor);
+    border-radius: 1rem;
+    height: 0.75rem;
+    width: 84%;
+}
+
+#prograss-bar-wrapper span {
+    position: absolute;
+    color: var(--grey2);
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.zero {
+    left: 0;
+    top: -325%;
+}
+
+.fifty {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+    top: -325%;
+}
+
+.hundred {
+    right: 0;
+    top: -325%;
+}
+
+.percent {
+    right: 0;
+    bottom: -325%;
+}
+
+footer p {
+    color: var(--grey2);
+    font-size: 1.6rem;
+}
+
+/* ----------------------- */
+/* animation keyframes */
+/* ----------------------- */
+
+@-webkit-keyframes lds-ellipsis1 {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+
+@keyframes lds-ellipsis1 {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+
+  @-webkit-keyframes lds-ellipsis3 {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+    }
+  }
+
+  @keyframes lds-ellipsis3 {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+    }
+  }
+
+  @-webkit-keyframes lds-ellipsis2 {
+    0% {
+      -webkit-transform: translate(0, 0);
+              transform: translate(0, 0);
+    }
+    100% {
+      -webkit-transform: translate(24px, 0);
+              transform: translate(24px, 0);
+    }
+  }
+
+  @keyframes lds-ellipsis2 {
+    0% {
+      -webkit-transform: translate(0, 0);
+              transform: translate(0, 0);
+    }
+    100% {
+      -webkit-transform: translate(24px, 0);
+              transform: translate(24px, 0);
+    }
+  }

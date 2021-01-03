@@ -1,0 +1,234 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="closeApp-wrapper d-flex align-items-center justify-content-end">
+        <button id="minimizeApp">-</button>
+        <button id="closeApp">X</button>
+    </div>
+    <div id="loading">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div id="body-wrapper" class="d-none">
+        <!-- left side of the app starts here-->
+        <div class="left-side">
+            <!-- section to display today weather -->
+            <section id="today-weather">
+                <div class="today-weather-content w-100">
+                    <div class="btns-wrapper d-flex align-items-center justify-content-between">
+                        <button class="search-btn">Search for places</button>
+                    </div>
+                    <figure class="today-img-wrapper text-center">
+                        <img class="weather-icon" alt="">
+                    </figure>
+                    <div class="today-temp mx-auto d-flex align-items-center">
+                        <p class="temp-val"></p>
+                        <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                    </div>
+                    <div class="today-state">
+                        <p class="text-center">shower</p>
+                    </div>
+                    <div class="today-date d-flex align-items-center justify-content-between mx-auto">
+                        <span>Today</span>
+                        <span>.</span>
+                        <time datetime="10-20-2000">Fri, 5 Jun</time>
+                    </div>
+                    <div class="city-wrapper d-flex align-items-center justify-content-center">
+                        <svg viewBox="0 0 17.470354 26.355613" version="1.1" width='17px' style="margin-right: 10px">
+                            <path
+                                d="M 8.8561399,26.336567 C 8.7641832,26.303794 8.1367468,25.837799 7.638501,25.43223 5.070011,23.341494 2.9317643,20.565798 1.604423,17.599287 0.06087532,14.149571 -0.39165966,10.518126 0.34569243,7.498387 0.83677911,5.4871996 1.8463154,3.7417781 3.2582409,2.4627837 5.4690183,0.46014838 8.0525211,-0.36445541 10.507845,0.14885087 c 2.304436,0.4817618 4.458257,2.19814523 5.677752,4.52460923 0.634745,1.2109183 1.020648,2.5297988 1.220877,4.1725186 0.08473,0.6951503 0.08528,2.4957773 9.97e-4,3.2706743 -0.356231,3.275186 -1.506573,6.419564 -3.382147,9.244855 -1.243501,1.87316 -2.847471,3.559458 -4.4728147,4.70239 -0.3793362,0.266748 -0.5383154,0.328998 -0.6963694,0.272669 z M 9.5945716,14.860441 c 1.1432114,-0.276908 2.1397184,-1.032609 2.7726514,-2.102639 0.329838,-0.557621 0.533815,-1.105805 0.660653,-1.775487 0.07636,-0.403157 0.08473,-1.4703015 0.01468,-1.8716575 C 12.684684,7.0601952 11.272841,5.4942437 9.4608226,5.1379668 9.0212232,5.0515332 8.1597256,5.0805448 7.7555303,5.1953934 6.9175665,5.4334938 6.2298015,5.8688586 5.6488353,6.5289597 5.0017767,7.264156 4.5743998,8.2065541 4.4265536,9.2241828 c -0.079325,0.5459922 -0.050034,1.4113712 0.065511,1.9354852 0.2112581,0.95827 0.6123024,1.745252 1.2324816,2.418537 0.6144963,0.667115 1.461428,1.152417 2.2650443,1.297898 0.137928,0.02497 0.273348,0.05157 0.3009337,0.05911 0.1267839,0.03466 1.0772715,-0.01985 1.3040474,-0.07477 z"
+                                id="path834" /></svg>
+                        <span>helsinki</span>
+                    </div>
+                </div>
+            </section>
+            <!-- section to display search -->
+            <section id="search-sec">
+                <div class="close-btn-wrapper d-flex justify-content-end">
+                    <button>X</button>
+                </div>
+                <form class="d-flex align-items-center justify-content-between w-100">
+                    <svg version="1.1" viewBox="0 0 30.178059 30.236541" width="20px">
+                        <g transform="translate(-98.162014,-227.38421)">
+                            <path
+                                d="m 126.08268,257.55261 c -0.32103,-0.0867 -1.76497,-1.41315 -4.34241,-3.98891 l -3.86145,-3.85894 v -0.74719 c 0,-0.51771 -0.0912,-0.82971 -0.29687,-1.01585 -0.39561,-0.35802 -0.44944,-0.34771 -1.172,0.22457 -2.06183,1.633 -5.31902,2.49036 -8.13449,2.14117 -1.66307,-0.20626 -2.2189,-0.35549 -3.46444,-0.93013 -3.07355,-1.41802 -5.220617,-3.91826 -6.342604,-7.38592 -0.408757,-1.26333 -0.408492,-4.90671 5.3e-4,-6.16865 0.544565,-1.68044 1.461614,-3.42837 2.256234,-4.30046 0.97573,-1.07085 1.43771,-1.47887 2.407,-2.12582 2.05849,-1.37396 4.05402,-2.00775 6.3357,-2.01225 4.39517,-0.009 8.42495,2.43306 10.34873,6.27052 0.687,1.37038 0.72997,1.4889 1.051,2.89851 0.54388,2.38811 0.23944,4.82645 -0.92219,7.38614 -0.10129,0.22321 -0.50615,0.90256 -0.89969,1.50967 -0.69018,1.06473 -0.70537,1.11504 -0.42902,1.42041 0.20565,0.22724 0.49908,0.31658 1.03977,0.31658 h 0.75327 l 3.90845,3.93657 c 3.99043,4.01914 4.13894,4.21426 3.98455,5.23524 -0.13451,0.88955 -1.20915,1.46789 -2.22,1.19474 z m -14.36053,-10.70546 c 0.75715,-0.24454 2.22319,-0.91951 2.53034,-1.16499 1.32491,-1.05884 2.05046,-1.89576 2.58983,-2.98737 0.88647,-1.79408 1.24591,-3.88612 0.88363,-5.14304 -0.74131,-2.57194 -1.0734,-3.17633 -2.51095,-4.56982 -3.13468,-3.03859 -7.93784,-3.08909 -11.15339,-0.11727 -1.10129,1.01781 -1.75592,2.00956 -2.27403,3.4451 -0.51924,1.43865 -0.51125,3.86674 0.0171,5.19465 0.19538,0.49106 0.39412,1.02067 0.44164,1.17691 0.0475,0.15625 0.15094,0.28408 0.22981,0.28408 0.0789,0 0.1434,0.11006 0.1434,0.24457 0,0.13451 0.49308,0.74363 1.09575,1.3536 1.35727,1.37375 2.92461,2.18027 4.91056,2.52688 0.60961,0.10639 2.46498,-0.0394 3.09632,-0.2433 z" />
+                        </g>
+                    </svg>
+                    <input type="text" placeholder="search location">
+                    <ul id="autocomplete">
+                    </ul>
+                    <button>Search</button>
+                </form>
+                <div id="prev-search"></div>
+            </section>
+        </div>
+        <!-- left side of the app ends here -->
+        <!-- ------------------------------ -->
+        <!-- right side of the app starts here -->
+        <div id="no-data" class="d-flex align-items-center justify-content-center d-none">
+            <p class="text-center">Faild to load data
+            </p>
+        </div>
+        <div class="right-side">
+            <div class="switch-temp-wrapper d-flex justify-content-end">
+                <button id="c-btn" class="switch-temp-active"><sup>&#176;</sup>C</button>
+                <button id="f-btn"><sup>&#176;</sup>F</button>
+            </div>
+            <div class="five-days-wrapper d-flex flex-wrap justify-content-end">
+                <div class="each-day d-flex flex-col align-items-center text-center">
+                    <time class="each-day-date" datetime="12-2-2020">Tomorrow</time>
+                    <figure>
+                        <img class="weather-icon"  alt="">
+                    </figure>
+                    <div class="each-day-temp-wrapper d-flex justify-content-between w-100">
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="each-day d-flex flex-col align-items-center text-center">
+                    <time class="each-day-date" datetime="12-2-2020">Fri, 5 Jun</time>
+                    <figure>
+                        <img class="weather-icon"  alt="">
+                    </figure>
+                    <div class="each-day-temp-wrapper d-flex justify-content-between w-100">
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="each-day d-flex flex-col align-items-center text-center">
+                    <time class="each-day-date" datetime="12-2-2020">Fri, 5 Jun</time>
+                    <figure>
+                        <img class="weather-icon"  alt="">
+                    </figure>
+                    <div class="each-day-temp-wrapper d-flex justify-content-between w-100">
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="each-day d-flex flex-col align-items-center text-center">
+                    <time class="each-day-date" datetime="12-2-2020">Fri, 5 Jun</time>
+                    <figure>
+                        <img class="weather-icon"  alt="">
+                    </figure>
+                    <div class="each-day-temp-wrapper d-flex justify-content-between w-100">
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="each-day d-flex flex-col align-items-center text-center">
+                    <time class="each-day-date" datetime="12-2-2020">Fri, 5 Jun</time>
+                    <figure>
+                        <img class="weather-icon"  alt="">
+                    </figure>
+                    <div class="each-day-temp-wrapper d-flex justify-content-between w-100">
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                        <div class="w-50 d-flex align-items-center justify-content-center">
+                            <p class="temp-val"></p>
+                            <span><sup>&#176;</sup><span class="c-temp">C</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="today-heighlight">
+                <h2>Today's Hightlights</h2>
+                <div class="d-flex flex-wrap">
+                    <div id="wind-status" class="heightlights-sec d-flex flex-col align-items-center">
+                        <h3>Wind status</h3>
+                        <div class="heightlights-val d-flex align-items-center">
+                            <p class="heightlights-val-num">7</p>
+                            <p>mph</p>
+                        </div>
+                        <div id="wind-dir" class="d-flex align-items-center">
+                            <div id="dir" class="text-center">
+                                <svg version="1.1" viewBox="0 0 18.553883 22.485288" height="15px">
+                                    <g transform="translate(-60.816505,-226.16451)">
+                                        <path
+                                            d="m 71.126713,226.23424 c 0.488422,0.14973 0.572659,0.24953 0.937324,1.11059 0.220364,0.52035 0.43352,1.09405 0.473673,1.2749 0.103473,0.46605 0.636068,1.90629 1.420273,3.8407 0.370941,0.915 0.675005,1.80693 0.675704,1.98209 6.92e-4,0.17514 0.137033,0.57424 0.302971,0.88688 0.165937,0.31265 0.401976,0.91212 0.524532,1.33218 0.122552,0.42006 0.463672,1.38023 0.758034,2.1337 0.894483,2.28957 2.159806,5.69327 2.928159,7.8767 0.377465,1.07264 0.289626,1.51862 -0.369981,1.87843 -0.41816,0.2276 -1.083447,0.0703 -2.252796,-0.53385 -0.348169,-0.17987 -0.871452,-0.42584 -1.16285,-0.5466 -0.291401,-0.12076 -0.553134,-0.2633 -0.581636,-0.31677 -0.0285,-0.0535 -0.179854,-0.13853 -0.336344,-0.18905 -0.156489,-0.0505 -1.152093,-0.51615 -2.212454,-1.03476 -1.060365,-0.5186 -2.093817,-0.91269 -2.296571,-0.87575 -0.202739,0.037 -0.94537,0.30499 -1.65027,0.59566 -4.562493,1.88132 -6.351936,2.53669 -6.718388,2.46059 -0.151925,-0.0316 -0.403778,-0.29769 -0.559679,-0.59142 -0.284665,-0.53634 -0.252522,-1.00582 0.11818,-1.72612 0.329588,-0.64041 1.548567,-3.26156 1.576822,-3.3906 0.01477,-0.0674 0.260049,-0.61808 0.545084,-1.22371 0.285029,-0.60564 0.532407,-1.15237 0.549726,-1.21496 0.0173,-0.0626 0.203749,-0.49043 0.414294,-0.95073 0.210547,-0.46031 0.396875,-0.88834 0.414056,-0.95119 0.01716,-0.0629 0.265888,-0.60708 0.552669,-1.20941 0.675398,-1.41854 0.645984,-1.35452 0.980575,-2.13451 0.158124,-0.36863 0.523919,-1.1597 0.812869,-1.75795 0.288955,-0.59825 0.536815,-1.14407 0.550799,-1.21294 0.01397,-0.0689 0.446911,-1.0451 0.962055,-2.1694 0.515145,-1.1243 0.949567,-2.0977 0.965386,-2.16312 0.08359,-0.34569 0.582474,-1.04757 0.842794,-1.18574 0.164087,-0.0871 0.53983,-0.0843 0.83499,0.006 z" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p id="compass">wsw</p>
+                        </div>
+                    </div>
+                    <div id="humidity" class="heightlights-sec d-flex flex-col align-items-center">
+                        <h3>Humidity</h3>
+                        <div class="heightlights-val d-flex align-items-center">
+                            <p class="heightlights-val-num">84</p>
+                            <p>%</p>
+                        </div>
+                        <div id="prograss-bar-wrapper" class="mx-auto">
+                            <div id="prograss-bar"></div>
+                            <span class="zero">0</span>
+                            <span class="fifty">50</span>
+                            <span class="hundred">100</span>
+                            <span class="percent">%</span>
+                        </div>
+                    </div>
+                    <div id="visibility" class="heightlights-sec d-flex flex-col align-items-center">
+                        <h3>Visibility</h3>
+                        <div class="heightlights-val d-flex align-items-center">
+                            <p class="heightlights-val-num">6.4</p>
+                            <p>miles</p>
+                        </div>
+                    </div>
+                    <div id="air-pressure" class="heightlights-sec d-flex flex-col align-items-center">
+                        <h3>Air Pressure</h3>
+                        <div class="heightlights-val d-flex align-items-center">
+                            <p class="heightlights-val-num">998</p>
+                            <p>mb</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <p class="text-center">Alaa Abd El-Rahim @ DevChallenges.io</p>
+            </footer>
+        </div>
+        <!-- rgith side of the app ends here -->
+        <!-- ------------------------------ -->
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="./assets/scripts/index.js"></script>
+</body>
+
+</html>

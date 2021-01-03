@@ -1,0 +1,20 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "App to show weather all over the world",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "weather",
+    "weather today",
+    "expected weather"
+  ],
+  "author": "Alaa Abd El-Rahim",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "electron": "^10.1.1"
+  }
+}
